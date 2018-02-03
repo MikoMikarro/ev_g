@@ -20,9 +20,8 @@ def iniciar(n_alelos,n_individuos_alelo):
 
     lines = []
     file = open(file_name,"w")
-    text = ""
-    for i in pob:
-        text += str(i) + "."
+    for i in range(n_alelos):
+        text += str(i+1)+":"+str(n_individuos_alelo)
     text += "\n"
     file = open(file_name, "w")
     file.write(text)
@@ -50,9 +49,11 @@ def evolve():
     file.write(data_prev+text)
     file.close()
 
-#def representar():
+def representar():
+
+
 
 iniciar(n_alelos,n_individuos_alelo)
 for i in range(gen):
     evolve()
-#representar()
+representar()

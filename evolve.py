@@ -139,3 +139,5 @@ try:
 except KeyboardInterrupt:
     represent()
     quit()
+except MemoryError:
+    print ("Use aceptable values")

@@ -61,7 +61,7 @@ def represent(): # It's just for visualicing the evolutions made
         for l in range(num_gen):
             populations[l].append(int(split(split(i,",")[l],":")[1])) #We need to create a list of list, each big list is a reference to each specie and inside there is the evolution of its population
     for i in populations:
-        plt.plot(range(gen_size),i, linewidth = 2)  # Creating graph
+        plt.plot(range(gen_size),i,'.-', linewidth = 2)  # Creating graph
     plt.show()
 
 ############# ---  Menu and init
@@ -69,70 +69,73 @@ def represent(): # It's just for visualicing the evolutions made
 iniciador(num_gen,pob_gen)
 
 check = True
+try:
+    while check:
+        num = 1
+        for i in range(gener):
+            evolve()
+            print "evolved- ",num
+            num+=1
+        represent()
+        re_check = True
+        while re_check:
+            print (" Menu: ")
+            print (" a - add more generations")
+            print (" b - exit")
+            print (" c - evolve until 1 is left")
+            print (" d - volve until x is left")
+            ans = raw_input()
+            if ans.lower() == "a" :
+                while True:
+                    print "How many generations:"
+                    try:
+                        gener = input()
+                        re_check = False
+                        break
+                    except:
+                        print "Entire number"
+            elif ans.lower() == "b":
+                file = open(file_name,"w")
+                file.close()
+                check = False
+                break
+            elif ans.lower() == "c":
+                super_check = True
+                while super_check:
+                    evolve()
+                    print "evolved- ",num
+                    num+=1
+                    file = open(file_name,"r")
+                    data = file.readlines()[-1]
+                    for i in range(num_gen):
+                        if int(split(split(data,",")[i],":")[1]) == (num_gen * pob_gen):
+                            represent()
+                            super_check = False
+                            break
+            elif ans.lower() == "d":
+                print("How many species do you want to maintain alive")
+                super_check = True
+                while True:
+                    passnum_s = input()
+                    if ans <= num_gen and ans >= 1:
+                        break
+                    else:
+                        print "number between 1 and ",num_gen
+                while super_check:
+                    evolve()
+                    print "evolved- ",num
+                    num+=1
+                    file = open(file_name,"r")
+                    data = file.readlines()[-1]
+                    num_r = 0
 
-while check:
-    num = 1
-    for i in range(gener):
-        evolve()
-        print "evolved- ",num
-        num+=1
+                    for i in range(num_gen):
+                        if int(split(split(data,",")[i],":")[1]) == 0: # Checking how much species have no specimens
+                            num_r += 1
+                        if num_r >= (num_gen-num_s):
+                            represent()
+                            super_check = False
+                            break
+except KeyboardInterrupt:
     represent()
-    re_check = True
-    while re_check:
-        print (" Menu: ")
-        print (" a - add more generations")
-        print (" b - exit")
-        print (" c - evolve until 1 is left")
-        print (" d - volve until x is left")
-        ans = raw_input()
-        if ans.lower() == "a" :
-            while True:
-                print "How many generations:"
-                try:
-                    gener = input()
-                    re_check = False
-                    break
-                except:
-                    print "Entire number"
-        elif ans.lower() == "b":
-            file = open(file_name,"w")
-            file.close()
-            check = False
-            break
-        elif ans.lower() == "c":
-            super_check = True
-            while super_check:
-                evolve()
-                print "evolved- ",num
-                num+=1
-                file = open(file_name,"r")
-                data = file.readlines()[-1]
-                for i in range(num_gen):
-                    if int(split(split(data,",")[i],":")[1]) == (num_gen * pob_gen):
-                        represent()
-                        super_check = False
-                        break
-        elif ans.lower() == "d":
-            print("How many species do you want to maintain alive")
-            super_check = True
-            while True:
-                passnum_s = input()
-                if ans <= num_gen and ans >= 1:
-                    break
-                else:
-                    print "number between 1 and ",num_gen
-            while super_check:
-                evolve()
-                print "evolved- ",num
-                num+=1
-                file = open(file_name,"r")
-                data = file.readlines()[-1]
-                num_r = 0
-
-                for i in range(num_gen):
-                    if int(split(split(data,",")[i],":")[1]) == 0: # Checking how much species have no specimens
-                        num_r += 1
-                    if num_r >= (num_gen-num_s):
-                        represent()
-                        super_check = False
-                        break
+    quit()

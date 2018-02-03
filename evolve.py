@@ -73,6 +73,7 @@ while check:
         print (" a - anhadir mais generacions")
         print (" b - sair")
         print (" c - evolucionar ata que so quede 1")
+        print (" d - evolucionar ata que so queden x")
 
         ans = raw_input()
 

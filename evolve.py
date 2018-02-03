@@ -4,6 +4,8 @@ import string
 from string import split
 import random
 import matplotlib.pyplot as plt
+import numpy as np
+from scipy.interpolate import spline
 
 #################### --- Initial values
 
@@ -24,6 +26,7 @@ def iniciador(n_gen,p_gen): # Here we add the initial specimens
     file = open(file_name, "w")
     file.write(text) # Storing the data
     file.close()
+
 def evolve(): # Creating the diferences in species population ... (kind of natural selection)
     file = open(file_name, "r")
     data = file.readlines()[-1] # It only evolves from the last generation
@@ -49,6 +52,7 @@ def evolve(): # Creating the diferences in species population ... (kind of natur
     file = open(file_name,"w")
     file.write(act_data+text) # Storing it without destroying what we had
     file.close()
+
 def represent(): # It's just for visualicing the evolutions made
     file = open(file_name,"r")
     data = file.readlines() # Taking each generation
@@ -61,17 +65,21 @@ def represent(): # It's just for visualicing the evolutions made
         for l in range(num_gen):
             populations[l].append(int(split(split(i,",")[l],":")[1])) #We need to create a list of list, each big list is a reference to each specie and inside there is the evolution of its population
     for i in populations:
-        plt.plot(range(gen_size),i,'.-', linewidth = 2)  # Creating graph
+        x = np.array(range(gen_size))
+        y = np.array(i)
+        x_smooth = np.linspace(x.min(),x.max(),150)
+        y_smooth = spline(x,y,x_smooth)
+        plt.plot(x_smooth,y_smooth)  # Creating graph
     plt.show()
 
 ############# ---  Menu and init
 
 iniciador(num_gen,pob_gen)
-
+num = 1
 check = True
 try:
     while check:
-        num = 1
+
         for i in range(gener):
             evolve()
             print "evolved- ",num
@@ -117,7 +125,7 @@ try:
                 super_check = True
                 while True:
                     passnum_s = input()
-                    if ans <= num_gen and ans >= 1:
+                    if passnum_s <= num_gen and passnum_s >= 1:
                         break
                     else:
                         print "number between 1 and ",num_gen

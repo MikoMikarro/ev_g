@@ -21,26 +21,29 @@ def iniciador(n_gen,p_gen):
 
 def evolve():
     file = open(file_name, "r")
-    data = file.readlines()[-1][:-1]
+    data = file.readlines()[-1]
     file.close()
-    new_list
-    # n_data = []
-    # for i in split(data,".")[:-1]:
-    #     n_data.append(i)
-    # pobl = len(n_data)
-    # new_ind = []
-    # for i in range(pobl):
-    #     new_ind.append(n_data[int(random.randint(0,pobl-1))])
-    # file = open(file_name,"r")
-    # act_data = file.read()
-    # file.close()
-    # text = ""
-    # for i in new_ind:
-    #     text += str(i) + "."
-    # text += "\n"
-    # file = open(file_name,"w")
-    # file.write(act_data+text)
-    # file.close()
+    new_list = []
+    for i in split(data,",")[:-1]:
+        for h in range(int(split(i,":")[1])):
+            new_list.append(split(i,":")[0])
+    pobl = len(new_list)
+    new_ind = []
+    for i in range(pobl):
+        new_ind.append(new_list[int(random.randint(0,pobl-1))])
+    file = open(file_name,"r")
+    act_data = file.read()
+    file.close()
+    np_gen = []
+    for i in range(num_gen):
+        np_gen.append(new_ind.count(str(int(i)+1)))
+    text = ""
+    for i in range(num_gen):
+        text += str(int(i)+1) +":"+ str(np_gen[i])+","
+    text += "\n"
+    file = open(file_name,"w")
+    file.write(act_data+text)
+    file.close()
 def represent():
     file = open(file_name,"r")
     data = file.readlines()[:-1]
@@ -66,6 +69,9 @@ def represent():
         plt.plot(range(gen_size),i,label = num)
     plt.show()
 iniciador(num_gen,pob_gen)
+for i in range(gener):
+    evolve()
+
 # check = True
 # while check:
 #     for i in range(gener):

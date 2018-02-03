@@ -4,15 +4,17 @@ import random
 import matplotlib.pyplot as plt
 
 file_name = "data.txt"
-num_gen = 10
-pob_gen = 3000
-gener = 200
+
+while True:
+        num_gen = input("Numero de alelos: ")
+        pob_gen = input("Poblacion inicial de cada alelo: ")
+        gener = 10
+        break
 def iniciador(n_gen,p_gen):
     ind = []
     for i in range(n_gen):
         for l in range(p_gen):
             ind.append(i+1)
-    # print ind
     text = ""
     for i in ind:
         text += str(i) + "."
@@ -24,7 +26,6 @@ def evolve():
     file = open(file_name, "r")
     data = file.readlines()[-1][:-1]
     file.close()
-
     n_data = []
     for i in split(data,".")[:-1]:
         n_data.append(i)
@@ -66,7 +67,7 @@ def represent():
     for i in populations:
         num+=1
         plt.plot(range(gener+1),i,label = num)
-    plt.legend()
+    # plt.legend()
     plt.show()
 
 iniciador(num_gen,pob_gen)

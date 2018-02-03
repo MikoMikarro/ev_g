@@ -65,11 +65,7 @@ def represent(): # It's just for visualicing the evolutions made
         for l in range(num_gen):
             populations[l].append(int(split(split(i,",")[l],":")[1])) #We need to create a list of list, each big list is a reference to each specie and inside there is the evolution of its population
     for i in populations:
-        x = np.array(range(gen_size))
-        y = np.array(i)
-        x_smooth = np.linspace(x.min(),x.max(),150)
-        y_smooth = spline(x,y,x_smooth)
-        plt.plot(x_smooth,y_smooth)  # Creating graph
+        plt.plot(range(gen_size),i,".-")
     plt.show()
 
 ############# ---  Menu and init
@@ -140,7 +136,7 @@ try:
                     for i in range(num_gen):
                         if int(split(split(data,",")[i],":")[1]) == 0: # Checking how much species have no specimens
                             num_r += 1
-                        if num_r >= (num_gen-num_s):
+                        if num_r >= (num_gen-passnum_s):
                             represent()
                             super_check = False
                             break

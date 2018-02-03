@@ -12,12 +12,13 @@ n_individuos_alelo = 5
 
 file_name = "data.txt"
 
+pob = []
+
 def iniciar(n_alelos,n_individuos_alelo):
-    pob = []
     for i in range(n_alelos):
         for l in range(n_individuos_alelo):
             pob.append(i+1)
-    lines = []
+
     text = ""
     file = open(file_name,"w")
     for i in range(n_alelos):
@@ -29,15 +30,18 @@ def iniciar(n_alelos,n_individuos_alelo):
 
 def evolve():
     file = open(file_name,"r")
-    pob_prev = file.readlines()[-1][:-1]
+    data = file.readlines()[-1]
     file.close()
-    pob_prev_n = []
-    for i in split(pob_prev,".")[:-1]:
-        pob_prev_n.append(i)
-    n_pob = len(pob_prev_n)
+
+    pob_prev = []
+    for i in split(data,","):
+        for l in range(int(split(i,":")[1])):
+            pob_prev.append(split(i,":")[0])
+
     pob_nueva = []
+    n_pob = len(pob_prev)
     for i in range(n_pob):
-        pob_nueva.append(pob_prev_n[random.randint(0,n_pob-1)])
+        pob_nueva.append(pob_prev[random.randint(0,n_pob-1)])
     file = open(file_name,"r")
     data_prev = file.read()
     file.close()

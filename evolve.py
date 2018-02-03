@@ -68,7 +68,7 @@ def represent(): # It's just for visualicing the evolutions made
 
 iniciador(num_gen,pob_gen)
 
-chMenu
+check = True
 while check:
     num = 1
     for i in range(gener):

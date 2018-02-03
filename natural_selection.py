@@ -85,9 +85,13 @@ def representar():
 
     plt.show()
 #---------------------------#
+k = 0
 iniciar(n_alelos,n_individuos_alelo)
 for i in range(generaciones):
     evolve()
+    k += 1
+    print "Generacion: ",k
+
 representar()
 
 check_1 = True
@@ -104,6 +108,9 @@ while check_1:
             ad_generaciones = input("Numero de generaciones adicionales:")
             for i in range(ad_generaciones):
                 evolve();
+                k += 1
+                print "Generacion: ",k
+
             representar()
             check_2 = False
 
@@ -117,20 +124,26 @@ while check_1:
                 else:
                     print "Error"
             check_4 = True
+
             while check_4:
                 evolve()
+                k += 1
+                print "Generacion: ",k
                 file = open(file_name,"r")
                 data = file.readlines()[-1]
                 file.close()
                 pob_prev = []
                 for i in split(data,",")[:-1]:
-                    for l in range(int(split(i,":")[1])):
-                        pob_prev.append(split(i,":")[0])
+                    pob_prev.append(int(split(i,":")[1]))
 
-                n = pob_prev.count("0")
-
-                if n >= resp_2 :
+                n = pob_prev.count(0)
+                if n >= n_alelos - resp_2 :
                     representar()
                     check_4 = False
                     check_3 = False
                     break
+
+
+    elif resp.upper() == "C":
+        check_1 = False
+        break

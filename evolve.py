@@ -46,20 +46,20 @@ def evolve():
     file.close()
 def represent():
     file = open(file_name,"r")
-    data = file.readlines()[:-1]
+    data = file.readlines()
     file.close()
     populations = []
     for i in range(num_gen):
         populations.append([])
-    print populations
-
     gen_size  = len(data)
     for i in data:
         for l in range(num_gen):
-            populations[l].append(split(split(i,",")[l],":")[1])
-    print populations
+            populations[l].append(int(split(split(i,",")[l],":")[1]))
+    num = 1
     for i in populations:
-        plt.plot(range(gen_size),i)
+        plt.plot(range(gen_size),i,label=str(num))
+        num+=1
+
     plt.show()
 iniciador(num_gen,pob_gen)
 check = True
@@ -85,7 +85,7 @@ while check:
                 except:
                     print "Numero enteiro"
         elif ans.lower() == "b":
-            file = file.open(file_name,"w")
+            file = open(file_name,"w")
             file.close()
             check = False
             break

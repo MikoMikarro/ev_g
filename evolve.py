@@ -64,14 +64,19 @@ def represent():
 iniciador(num_gen,pob_gen)
 check = True
 while check:
+    num = 1
     for i in range(gener):
+
         evolve()
+        print "evolved- ",num
+        num+=1
     represent()
     re_check = True
     while re_check:
         print (" Que queres fascer: ")
         print (" a - anhadir mais generacions")
         print (" b - sair")
+        print (" c - evolucionar ata que so quede 1")
 
         ans = raw_input()
 
@@ -89,3 +94,15 @@ while check:
             file.close()
             check = False
             break
+        elif ans.lower() == "c":
+            super_check = True
+            while super_check:
+                evolve()
+                file = open(file_name,"r")
+                data = file.readlines()[-1]
+                for i in range(num_gen):
+                    if int(split(split(data,",")[i],":")[1]) == (num_gen * pob_gen):
+                        represent()
+                        super_check = False
+                        break
+                pass

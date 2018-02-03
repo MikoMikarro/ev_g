@@ -69,6 +69,7 @@ def represent(): # It's just for visualicing the evolutions made
 iniciador(num_gen,pob_gen)
 
 check = True
+
 while check:
     num = 1
     for i in range(gener):
@@ -129,9 +130,9 @@ while check:
                 num_r = 0
 
                 for i in range(num_gen):
-                    if int(split(split(data,",")[i],":")[1]) == 0:
+                    if int(split(split(data,",")[i],":")[1]) == 0: # Checking how much species have no specimens
                         num_r += 1
-                    if num_r == (num_gen-num_s):
+                    if num_r >= (num_gen-num_s):
                         represent()
                         super_check = False
                         break

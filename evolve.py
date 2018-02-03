@@ -56,7 +56,7 @@ def represent():
         for l in range(num_gen):
             populations[l].append(int(split(split(i,",")[l],":")[1]))
     for i in populations:
-        plt.plot(range(gen_size),i)
+        plt.plot(range(gen_size),i,'.-', linewidth = 2)
 
     plt.show()
 iniciador(num_gen,pob_gen)
@@ -64,7 +64,6 @@ check = True
 while check:
     num = 1
     for i in range(gener):
-
         evolve()
         print "evolved- ",num
         num+=1
@@ -96,6 +95,8 @@ while check:
             super_check = True
             while super_check:
                 evolve()
+                print "evolved- ",num
+                num+=1
                 file = open(file_name,"r")
                 data = file.readlines()[-1]
                 for i in range(num_gen):
@@ -103,4 +104,22 @@ while check:
                         represent()
                         super_check = False
                         break
-                pass
+        elif ans.lower() == "d":
+            super_check = True
+            num_s = input()
+
+            while super_check:
+                evolve()
+                print "evolved- ",num
+                num+=1
+                file = open(file_name,"r")
+                data = file.readlines()[-1]
+                num_r = 0
+
+                for i in range(num_gen):
+                    if int(split(split(data,",")[i],":")[1]) == 0:
+                        num_r += 1
+                    if num_r == (num_gen-num_s):
+                        represent()
+                        super_check = False
+                        break

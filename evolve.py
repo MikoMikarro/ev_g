@@ -57,7 +57,6 @@ def represent():
             populations[l].append(int(split(split(i,",")[l],":")[1]))
     for i in populations:
         plt.plot(range(gen_size),i,'.-', linewidth = 2)
-
     plt.show()
 iniciador(num_gen,pob_gen)
 check = True
@@ -105,9 +104,14 @@ while check:
                         super_check = False
                         break
         elif ans.lower() == "d":
+            print("Cantos queres deixar con vida")
             super_check = True
-            num_s = input()
-
+            while True:
+                passnum_s = input()
+                if ans <= num_gen and ans >= 1:
+                    break
+                else:
+                    print "numero entre 1 e ",num_gen
             while super_check:
                 evolve()
                 print "evolved- ",num

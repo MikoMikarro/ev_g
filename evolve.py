@@ -57,40 +57,35 @@ def represent():
     for i in data:
         for l in range(num_gen):
             populations[l].append(split(split(i,",")[l],":")[1])
-        num = 1
     print populations
     for i in populations:
-        num+=1
         plt.plot(range(gen_size),i)
     plt.show()
 iniciador(num_gen,pob_gen)
-for i in range(gener):
-    evolve()
-represent()
-# check = True
-# while check:
-#     for i in range(gener):
-#         evolve()
-#     represent()
-#     re_check = True
-#     while re_check:
-#         print (" Que queres fascer: ")
-#         print (" a - anhadir mais generacions")
-#         print (" b - sair")
-#
-#         ans = raw_input()
-#
-#         if ans.lower() == "a" :
-#             while True:
-#                 print "Cantas xeracions"
-#                 try:
-#                     gener = input()
-#                     re_check = False
-#                     break
-#                 except:
-#                     print "Numero enteiro"
-#         elif ans.lower() == "b":
-#             file = file.open(file_name,"w")
-#             file.close()
-#             check = False
-#             break
+check = True
+while check:
+    for i in range(gener):
+        evolve()
+    represent()
+    re_check = True
+    while re_check:
+        print (" Que queres fascer: ")
+        print (" a - anhadir mais generacions")
+        print (" b - sair")
+
+        ans = raw_input()
+
+        if ans.lower() == "a" :
+            while True:
+                print "Cantas xeracions"
+                try:
+                    gener = input()
+                    re_check = False
+                    break
+                except:
+                    print "Numero enteiro"
+        elif ans.lower() == "b":
+            file = file.open(file_name,"w")
+            file.close()
+            check = False
+            break

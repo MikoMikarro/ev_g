@@ -8,7 +8,7 @@ file_name = "data.txt"
 while True:
         num_gen = input("Numero de alelos: ")
         pob_gen = input("Poblacion inicial de cada alelo: ")
-        gener = 10
+        gener = input("Cantas xeracions: ")
         break
 def iniciador(n_gen,p_gen):
     ind = []
@@ -97,5 +97,7 @@ while check:
                 except:
                     print "Numero enteiro"
         elif ans.lower() == "b":
+            file = file.open(file_name,"w")
+            file.close()
             check = False
             break

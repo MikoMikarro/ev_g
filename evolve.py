@@ -48,30 +48,25 @@ def represent():
     file = open(file_name,"r")
     data = file.readlines()[:-1]
     file.close()
-    n_data = []
-    for i in data:
-        for h in split(i,".")[:-1]:
-            n_data.append(h)
-    gen_size = len(data)
     populations = []
     for i in range(num_gen):
         populations.append([])
-    for i in range(gen_size):
+    print populations
+
+    gen_size  = len(data)
+    for i in data:
         for l in range(num_gen):
-            popgen = 0
-            for h in n_data[num_gen*pob_gen*i:(num_gen*pob_gen*i)+(num_gen*pob_gen)]:
-                if str(h) == str(int(l)+1):
-                    popgen+=1
-            populations[l].append(popgen)
-    num = 1
+            populations[l].append(split(split(i,",")[l],":")[1])
+        num = 1
+    print populations
     for i in populations:
         num+=1
-        plt.plot(range(gen_size),i,label = num)
+        plt.plot(range(gen_size),i)
     plt.show()
 iniciador(num_gen,pob_gen)
 for i in range(gener):
     evolve()
-
+represent()
 # check = True
 # while check:
 #     for i in range(gener):

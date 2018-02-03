@@ -46,16 +46,17 @@ def evolve():
 
 def represent():
     file = open(file_name,"r")
-    data = file.readlines()
+    data = file.readlines()[:-1]
     file.close()
     n_data = []
     for i in data:
         for h in split(i,".")[:-1]:
             n_data.append(h)
+    gen_size = len(data)
     populations = []
     for i in range(num_gen):
         populations.append([])
-    for i in range(gener+1):
+    for i in range(gen_size):
         for l in range(num_gen):
             popgen = 0
             for h in n_data[num_gen*pob_gen*i:(num_gen*pob_gen*i)+(num_gen*pob_gen)]:
@@ -66,11 +67,35 @@ def represent():
     num = 1
     for i in populations:
         num+=1
-        plt.plot(range(gener+1),i,label = num)
+        plt.plot(range(gen_size),i,label = num)
     # plt.legend()
     plt.show()
 
 iniciador(num_gen,pob_gen)
-for i in range(gener):
-    evolve()
-represent()
+
+check = True
+
+while check:
+    for i in range(gener):
+        evolve()
+    represent()
+    re_check = True
+    while re_check:
+        print (" Que queres fascer: ")
+        print (" a - anhadir mais generacions")
+        print (" b - sair")
+
+        ans = raw_input()
+
+        if ans.lower() == "a" :
+            while True:
+                print "Cantas xeracions"
+                try:
+                    gener = input()
+                    re_check = False
+                    break
+                except:
+                    print "Numero enteiro"
+        elif ans.lower() == "b":
+            check = False
+            break

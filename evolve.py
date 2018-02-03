@@ -31,7 +31,6 @@ def evolve():
     new_ind = []
     for i in range(pob_gen*num_gen):
         new_ind.append(new_list[int(random.randint(0,len(new_list)-1))])
-    print new_ind
     file = open(file_name,"r")
     act_data = file.read()
     file.close()

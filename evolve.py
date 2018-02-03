@@ -26,11 +26,12 @@ def evolve():
     new_list = []
     for i in split(data,",")[:-1]:
         for h in range(int(split(i,":")[1])):
-            new_list.append(split(i,":")[0])
-    pobl = len(new_list)
+            if int(split(i,":")[0])  != 0:
+                new_list.append(split(i,":")[0])
     new_ind = []
-    for i in range(pobl):
-        new_ind.append(new_list[int(random.randint(0,pobl-1))])
+    for i in range(pob_gen*num_gen):
+        new_ind.append(new_list[int(random.randint(0,len(new_list)-1))])
+    print new_ind
     file = open(file_name,"r")
     act_data = file.read()
     file.close()
@@ -55,10 +56,8 @@ def represent():
     for i in data:
         for l in range(num_gen):
             populations[l].append(int(split(split(i,",")[l],":")[1]))
-    num = 1
     for i in populations:
-        plt.plot(range(gen_size),i,label=str(num))
-        num+=1
+        plt.plot(range(gen_size),i)
 
     plt.show()
 iniciador(num_gen,pob_gen)

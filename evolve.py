@@ -66,6 +66,7 @@ def represent():
     for i in populations:
         num+=1
         plt.plot(range(gener+1),i,label = num)
+    plt.legend()
     plt.show()
 
 iniciador(num_gen,pob_gen)

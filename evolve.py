@@ -4,8 +4,7 @@ import string
 from string import split
 import random
 import matplotlib.pyplot as plt
-import numpy as np
-from scipy.interpolate import spline
+import time
 
 #################### --- Initial values
 
@@ -34,8 +33,7 @@ def evolve(): # Creating the diferences in species population ... (kind of natur
     new_list = []
     for i in split(data,",")[:-1]:
         for h in range(int(split(i,":")[1])):
-            if int(split(i,":")[0])  != 0:
-                new_list.append(split(i,":")[0]) # Creating an list of the suposed specimens should be
+            new_list.append(split(i,":")[0]) # Creating an list of the suposed specimens should be
     new_ind = []
     for i in range(pob_gen*num_gen):
         new_ind.append(new_list[int(random.randint(0,len(new_list)-1))]) # Natural selection - The species with more specimens have more chances of surviving and killing others to have  more

@@ -62,9 +62,11 @@ def represent(): # It's just for visualicing the evolutions made
     print "Generations: ",gen_size
     for i in data:
         for l in range(num_gen):
-            populations[l].append(int(split(split(i,",")[l],":")[1])) #We need to create a list of list, each big list is a reference to each specie and inside there is the evolution of its population
+            if int(split(split(i,",")[l],":")[1]) != 0:
+                populations[l].append(int(split(split(i,",")[l],":")[1])) #We need to create a list of list, each big list is a reference to each specie and inside there is the evolution of its population
+
     for i in populations:
-        plt.plot(range(gen_size),i,".-")
+        plt.plot(range(len(i)),i,".-")
     plt.show()
 
 ############# ---  Menu and init

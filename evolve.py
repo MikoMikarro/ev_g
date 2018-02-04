@@ -59,6 +59,7 @@ def represent(): # It's just for visualicing the evolutions made
     for i in range(num_gen):
         populations.append([])
     gen_size  = len(data)
+    print "Generations: ",gen_size
     for i in data:
         for l in range(num_gen):
             populations[l].append(int(split(split(i,",")[l],":")[1])) #We need to create a list of list, each big list is a reference to each specie and inside there is the evolution of its population
@@ -69,15 +70,14 @@ def represent(): # It's just for visualicing the evolutions made
 ############# ---  Menu and init
 
 iniciador(num_gen,pob_gen)
-num = 1
 check = True
 try:
     while check:
-
-        for i in range(gener):
-            evolve()
-            print "evolved- ",num
-            num+=1
+        try:
+            for i in range(gener):
+                evolve()
+        except KeyboardInterrupt:
+            represent()
         represent()
         re_check = True
         while re_check:
@@ -104,16 +104,18 @@ try:
             elif ans.lower() == "c":
                 super_check = True
                 while super_check:
-                    evolve()
-                    print "evolved- ",num
-                    num+=1
-                    file = open(file_name,"r")
-                    data = file.readlines()[-1]
-                    for i in range(num_gen):
-                        if int(split(split(data,",")[i],":")[1]) == (num_gen * pob_gen):
-                            represent()
-                            super_check = False
-                            break
+                    try:
+                        evolve()
+                        file = open(file_name,"r")
+                        data = file.readlines()[-1]
+                        for i in range(num_gen):
+                            if int(split(split(data,",")[i],":")[1]) == (num_gen * pob_gen):
+                                represent()
+                                super_check = False
+                                break
+                    except KeyboardInterrupt:
+                        represent()
+                        super_check = False
             elif ans.lower() == "d":
                 print("How many species do you want to maintain alive")
                 super_check = True
@@ -124,20 +126,22 @@ try:
                     else:
                         print "number between 1 and ",num_gen
                 while super_check:
-                    evolve()
-                    print "evolved- ",num
-                    num+=1
-                    file = open(file_name,"r")
-                    data = file.readlines()[-1]
-                    num_r = 0
+                    try:
+                        evolve()
 
-                    for i in range(num_gen):
-                        if int(split(split(data,",")[i],":")[1]) == 0: # Checking how much species have no specimens
-                            num_r += 1
-                        if num_r >= (num_gen-passnum_s):
-                            represent()
-                            super_check = False
-                            break
+
+                        file = open(file_name,"r")
+                        data = file.readlines()[-1]
+                        num_r = 0
+                        pops = []
+                        for i in range(num_gen):
+                            pops.append(int(split(split(data,",")[i],":")[1]))
+                            if pops.count(0) >= (num_gen-passnum_s):
+                                represent()
+                                super_check = False
+                    except KeyboardInterrupt:
+                        represent()
+                        super_check = False
 except KeyboardInterrupt:
     represent()
     quit()

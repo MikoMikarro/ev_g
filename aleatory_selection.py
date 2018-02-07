@@ -76,6 +76,8 @@ def representar():
         for l in range(n_alelos):
             pob_rep[l].append(int(split(split(i,",")[l],":")[1]))
 
+    print pob_rep
+    print range(n_generaciones)
     for i in pob_rep:
         plt.plot(range(n_generaciones),i,".-")
 

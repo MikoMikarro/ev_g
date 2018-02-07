@@ -89,17 +89,27 @@ def representar():
     file.close()
 
     pob_rep = []
+
     n_generaciones = len(data)
 
     for i in range(n_alelos):
         pob_rep.append([])
 
-    for i in data:
+    for i in range(len(data)):
         for l in range(n_alelos):
-            pob_rep[l].append(int(split(split(i,",")[l],":")[1]))
+            if int(split(split(data[i],",")[l],":")[1]) == 0:
+                if int(split(split(data[i-1],",")[l],":")[1]) == 0 and i > 0:
+                    pass
+                else:
+                    pob_rep[l].append(int(0))
+            else:
+                pob_rep[l].append(int(split(split(data[i],",")[l],":")[1]))
 
-    for i in pob_rep:
-        plt.plot(range(n_generaciones),i,".-")
+    for i in range(len(pob_rep)):
+        print range(len(pob_rep[i]))
+        print pob_rep[i]
+    for i in range(len(pob_rep)):
+        plt.plot(range(len(pob_rep[i])),pob_rep[i],".-")
 
     plt.show()
 #---------------------------#

@@ -59,12 +59,16 @@ def represent(): # It's just for visualicing the evolutions made
     for i in range(num_gen):
         populations.append([])
     gen_size  = len(data)
-    print "Generations: ",gen_size
+    print "Generations: ",gen_size -1
     for i in data:
         for l in range(num_gen):
-            if int(split(split(i,",")[l],":")[1]) != 0:
+            if int(split(split(i,",")[l],":")[1]) == 0:
+                if int(split(split(data[data.index(i)-1],",")[l],":")[1]) == 0 and data.index(i) > 0:
+                    pass
+                else:
+                    populations[l].append(0)
+            else:
                 populations[l].append(int(split(split(i,",")[l],":")[1])) #We need to create a list of list, each big list is a reference to each specie and inside there is the evolution of its population
-
     for i in populations:
         plt.plot(range(len(i)),i,".-")
     plt.show()
@@ -101,8 +105,7 @@ try:
             elif ans.lower() == "b":
                 file = open(file_name,"w")
                 file.close()
-                check = False
-                break
+                quit()
             elif ans.lower() == "c":
                 super_check = True
                 while super_check:
@@ -130,8 +133,6 @@ try:
                 while super_check:
                     try:
                         evolve()
-
-
                         file = open(file_name,"r")
                         data = file.readlines()[-1]
                         num_r = 0

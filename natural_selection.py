@@ -5,11 +5,25 @@ from random import shuffle
 import matplotlib.pyplot as plt
 
 file_name = "data.txt"
-
+ans = ""
 pob = []
+alelos_ventaja = []
 
 while True:
     n_alelos = input("Alelos:")
+    for i in range(n_alelos):
+        check_a = True
+        while True:
+            ans = raw_input("Ventaja para el alelo " + str(i+1) + " ? S/n:")
+            if ans.upper() == "S":
+                alelos_ventaja.append(i+1)
+                check_a = False
+                break
+            elif ans.upper() == "N":
+                check_a = False
+                break
+
+    print "Alelos con vetaja evolutiva: " + str(alelos_ventaja)
     n_individuos_alelo = input("Individuos por alelo:")
     generaciones = input("Generaciones:")
     break
@@ -40,14 +54,22 @@ def evolve():
 
     pob_nueva = []
     n_pob = len(pob_prev)
+
     for i in range(n_pob):
-        pob_nueva.append(pob_prev[random.randint(0,n_pob-1)])
+        dato_nuevo_1 = str(pob_prev[random.randint(0,n_pob-1)])
+        dato_nuevo_2 = str(pob_prev[random.randint(0,n_pob-1)])
+        check_f = True
+        for l in range(len(alelos_ventaja)):
+            if str(alelos_ventaja[l]) == str(dato_nuevo_1):
+                pob_nueva.append(dato_nuevo_1)
+                check_f = False
+        if check_f == True:
+            pob_nueva.append(dato_nuevo_2)
 
     file = open(file_name,"r")
     data_prev = file.read()
     file.close()
     text = ""
-
     new_data = []
 
     for i in range(n_alelos):
@@ -122,9 +144,9 @@ while check_1:
             check_4 = True
 
             while check_4:
+                evolve()
                 k += 1
                 print "Generacion: ",k
-                evolve()
                 file = open(file_name,"r")
                 data = file.readlines()[-1]
                 file.close()

@@ -11,15 +11,13 @@ alelos_ventaja = []
 
 while True:
     n_alelos = input("Alelos:")
-    for i in range(n_alelos):
-        ans = raw_input("Ventaja para el alelo " + str(i+1) + " ? S/n:")
-        if ans.upper() == "S":
-            alelos_ventaja.append(i+1)
-        elif ans.upper() == "N":
+    while True:
+        n_alelos_ventaxe = input("Alelos con ventaxe evolutiva")
+        if n_alelos_ventaxe >= n_alelos:
+            print("Un numero aceptable por favor")
+        else:
             break
-
-
-    print "Alelos con vetaja evolutiva: " + str(alelos_ventaja)
+    print "Alelos con vetaja evolutiva: " + str(range(n_alelos_ventaxe))
     n_individuos_alelo = input("Individuos por alelo:")
     generaciones = input("Generaciones:")
     break
@@ -55,8 +53,8 @@ def evolve():
         dato_nuevo_1 = str(pob_prev[random.randint(0,n_pob-1)])
         dato_nuevo_2 = str(pob_prev[random.randint(0,n_pob-1)])
         check_f = True
-        for l in range(len(alelos_ventaja)):
-            if str(alelos_ventaja[l]) == str(dato_nuevo_1):
+        for l in range(n_alelos_ventaxe):
+            if str(l) == str(dato_nuevo_1):
                 pob_nueva.append(dato_nuevo_1)
                 check_f = False
         if check_f == True:

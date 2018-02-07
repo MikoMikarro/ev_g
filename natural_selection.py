@@ -12,16 +12,12 @@ alelos_ventaja = []
 while True:
     n_alelos = input("Alelos:")
     for i in range(n_alelos):
-        check_a = True
-        while True:
-            ans = raw_input("Ventaja para el alelo " + str(i+1) + " ? S/n:")
-            if ans.upper() == "S":
-                alelos_ventaja.append(i+1)
-                check_a = False
-                break
-            elif ans.upper() == "N":
-                check_a = False
-                break
+        ans = raw_input("Ventaja para el alelo " + str(i+1) + " ? S/n:")
+        if ans.upper() == "S":
+            alelos_ventaja.append(i+1)
+        elif ans.upper() == "N":
+            break
+
 
     print "Alelos con vetaja evolutiva: " + str(alelos_ventaja)
     n_individuos_alelo = input("Individuos por alelo:")

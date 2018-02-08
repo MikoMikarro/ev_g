@@ -11,17 +11,10 @@ alelos_ventaja = []
 
 while True:
     n_alelos = input("Alelos:")
-    for i in range(n_alelos):
-        check_a = True
-        while True:
-            ans = raw_input("Ventaja para el alelo " + str(i+1) + " ? S/n:")
-            if ans.upper() == "S":
-                alelos_ventaja.append(i+1)
-                check_a = False
-                break
-            elif ans.upper() == "N":
-                check_a = False
-                break
+    ans = input("Numero de alelos con ventaja:")
+    for i in range(ans):
+        alelos_ventaja.append(i+1)
+
 
     print "Alelos con vetaja evolutiva: " + str(alelos_ventaja)
     n_individuos_alelo = input("Individuos por alelo:")
@@ -105,9 +98,6 @@ def representar():
             else:
                 pob_rep[l].append(int(split(split(data[i],",")[l],":")[1]))
 
-    for i in range(len(pob_rep)):
-        print range(len(pob_rep[i]))
-        print pob_rep[i]
     for i in range(len(pob_rep)):
         plt.plot(range(len(pob_rep[i])),pob_rep[i],".-")
 

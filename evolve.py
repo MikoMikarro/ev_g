@@ -10,11 +10,13 @@ import time
 
 file_name= "data.txt"
 while True:
-        num_gen = input("Number of species: ")
-        pob_gen = input("Initial Population for each specie: ")
-        gener = input("Number of initial generations: ")
-        break
-
+        try:
+            num_gen = input("Number of species: ")
+            pob_gen = input("Initial Population for each specie: ")
+            gener = input("Number of initial generations: ")
+            break
+        except NameError:
+            print ("Numbers")
 ################### --- Functions
 
 def iniciador(n_gen,p_gen): # Here we add the initial specimens

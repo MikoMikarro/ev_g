@@ -11,10 +11,22 @@ alelos_ventaja = []
 
 while True:
     n_alelos = input("Alelos:")
-    ans = input("Numero de alelos con ventaja:")
-    for i in range(ans):
-        alelos_ventaja.append(i+1)
+    n_ventajas = input("Niveles de ventaja:")
+    for i in range(n_ventajas):
+        alelos_ventaja.append([])
+    for i in range(n_ventajas):
+        ans = input("Numero de alelos con ventaja de nivel" + " " + str(n_ventajas - i) + ":")
+        if ans <= n_alelos:
+            for n in range(ans):
+                if i > 0:
+                    alelos_ventaja[i].append(n + int(alelos_ventaja[i-1][-1]) + 1)
+                else :
+                    alelos_ventaja[i].append(n + 1)
 
+
+        else:
+            print "!Ese valor no es apto!"
+            pass
 
     print "Alelos con vetaja evolutiva: " + str(alelos_ventaja)
     n_individuos_alelo = input("Individuos por alelo:")
@@ -49,15 +61,20 @@ def evolve():
     n_pob = len(pob_prev)
 
     for i in range(n_pob):
-        dato_nuevo_1 = str(pob_prev[random.randint(0,n_pob-1)])
-        dato_nuevo_2 = str(pob_prev[random.randint(0,n_pob-1)])
+        datos_nuevos = []
+        for l in range(int(n_ventajas) + 1):
+            datos_nuevos.append(str(pob_prev[random.randint(0,n_pob-1)]))
+        print datos_nuevos
+        n = 0
         check_f = True
-        for l in range(len(alelos_ventaja)):
-            if str(alelos_ventaja[l]) == str(dato_nuevo_1):
-                pob_nueva.append(dato_nuevo_1)
-                check_f = False
+        for l in datos_nuevos:
+            for k in alelos_ventaja[n]:
+                if str(k) == str(l) and check_f == True:
+                 pob_nueva.append(l)
+                 check_f = False
+                 n += 1
         if check_f == True:
-            pob_nueva.append(dato_nuevo_2)
+            pob_nueva.append(l)
 
     file = open(file_name,"r")
     data_prev = file.read()

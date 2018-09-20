@@ -1,7 +1,6 @@
 ################### --- Libraries
 
-import string
-from string import split
+import split
 import random
 import matplotlib.pyplot as plt
 import time
@@ -34,8 +33,8 @@ def evolve(): # Creating the diferences in species population ... (kind of natur
     file.close()
     new_list = []
     for i in split(data,",")[:-1]:
-        for h in range(int(split(i,":")[1])):
-            new_list.append(split(i,":")[0]) # Creating an list of the suposed specimens should be
+        for h in range(int(i.split(":")[1])):
+            new_list.append(i.split(":")[0]) # Creating an list of the suposed specimens should be
     new_ind = []
     for i in range(pob_gen*num_gen):
         new_ind.append(new_list[int(random.randint(0,len(new_list)-1))]) # Natural selection - The species with more specimens have more chances of surviving and killing others to have  more
@@ -61,16 +60,16 @@ def represent(): # It's just for visualicing the evolutions made
     for i in range(num_gen):
         populations.append([])
     gen_size  = len(data)
-    print "Generations: ",gen_size -1
+    print ("Generations: ",gen_size -1)
     for i in data:
         for l in range(num_gen):
-            if int(split(split(i,",")[l],":")[1]) == 0:
-                if int(split(split(data[data.index(i)-1],",")[l],":")[1]) == 0 and data.index(i) > 0:
+            if int(i.split(",")[l].split(":")[1]) == 0:
+                if int(data[data.index(i)-1].split(",")[l].split(":")[1]) == 0 and data.index(i) > 0:
                     pass
                 else:
                     populations[l].append(0)
             else:
-                populations[l].append(int(split(split(i,",")[l],":")[1])) #We need to create a list of list, each big list is a reference to each specie and inside there is the evolution of its population
+                populations[l].append(int(i.split(",")[l].split(":")[1])) #We need to create a list of list, each big list is a reference to each specie and inside there is the evolution of its population
     for i in populations:
         plt.plot(range(len(i)),i,".-")
     plt.show()
@@ -97,13 +96,13 @@ try:
             ans = raw_input()
             if ans.lower() == "a" :
                 while True:
-                    print "How many generations:"
+                    print ("How many generations:")
                     try:
                         gener = input()
                         re_check = False
                         break
                     except:
-                        print "Entire number"
+                        print ("Entire number")
             elif ans.lower() == "b":
                 file = open(file_name,"w")
                 file.close()
@@ -116,7 +115,7 @@ try:
                         file = open(file_name,"r")
                         data = file.readlines()[-1]
                         for i in range(num_gen):
-                            if int(split(split(data,",")[i],":")[1]) == (num_gen * pob_gen):
+                            if int(data.split(",")[i].split(":")[1]) == (num_gen * pob_gen):
                                 represent()
                                 super_check = False
                                 break
@@ -131,7 +130,7 @@ try:
                     if passnum_s <= num_gen and passnum_s >= 1:
                         break
                     else:
-                        print "number between 1 and ",num_gen
+                        print ("number between 1 and ",num_gen)
                 while super_check:
                     try:
                         evolve()
@@ -140,7 +139,7 @@ try:
                         num_r = 0
                         pops = []
                         for i in range(num_gen):
-                            pops.append(int(split(split(data,",")[i],":")[1]))
+                            pops.append(int(data.split(",")[i].split(":")[1]))
                             if pops.count(0) >= (num_gen-passnum_s):
                                 represent()
                                 super_check = False
